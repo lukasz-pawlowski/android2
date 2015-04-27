@@ -3,4 +3,12 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="nazwaPliku">Nazwa Pliku</string>
+    <string name="tekstNotatki">Tekst Notatki</string>
+    <string name="zapiszNotke">Zapisz Notatkę</string>
+    <string name="otworzNotatki">Otwórz Notatkę</string>
+    <string name="otworzPlik">Otwórz Plik</string>
+    <string name="listaPlikow">Lista Plików</string>
+    <string name="tpliku">Tekst Pliku</string>
+    <string name="title_activity_show_files">Lista Plików</string>
 </resources>

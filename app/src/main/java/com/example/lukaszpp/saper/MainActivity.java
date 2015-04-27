@@ -1,9 +1,17 @@
 package com.example.lukaszpp.saper;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.io.FileOutputStream;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -35,5 +43,66 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //funkcja otwierająca notatki
+    public void otworzNotatki(View view){
+        Intent myIntent = new Intent(this, showFiles.class);
+        startActivity(myIntent);
+    }
+
+    //funkcja zapisująca notatkę
+    public void zapiszNotke(View view){
+       // Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+        //get text
+        EditText textFilenameObject = (EditText) findViewById(R.id.textFilename);
+        String filename = textFilenameObject.getText().toString();
+
+        EditText textFilecontentObject = (EditText) findViewById(R.id.textFilecontent);
+        String filecontent = textFilecontentObject.getText().toString();
+
+        //show text
+      // / TextView textViewObject = (TextView) findViewById(R.id.textView);
+      //  textViewObject.setText(message);
+
+
+        try {
+            FileOutputStream fos = openFileOutput(filename,2);
+            fos.write(filecontent.getBytes());
+            fos.close();
+
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Zapisano w pliku: " + filename);
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+        }catch(Exception e){
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("Blad zapisu do pliku " + filename);
+            builder1.setCancelable(true);
+            builder1.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
+        }
+
+
     }
 }
